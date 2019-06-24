@@ -107,14 +107,15 @@ export class Circle {
 }
 
 /**
- *
- * @param {Number[]} pointCoords - point coordinates
+ * @param {Number[]|Number[][]} pointsCoords - points coordinates
  * @param {Number} radius - radius of circle
  * @param {Element} container - container for circle and point
  * @returns {Circle}
  */
-export default function renderPointToCircle(pointCoords, radius, container) {
-    const point = new Point(pointCoords);
-    const circle = new Circle(radius, [point]);
+export default function renderPointsToCircle(pointsCoords, radius, container) {
+    const castedArrayCoords = pointsCoords.length && !(pointsCoords[0] instanceof Array) ?
+        [pointsCoords] : pointsCoords;
+    const points = castedArrayCoords.map(pointCoords => new Point(pointCoords));
+    const circle = new Circle(radius, points);
     return circle.renderTo(container);
 }
