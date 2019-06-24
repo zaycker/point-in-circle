@@ -9,17 +9,17 @@ export class Feature {
 
 export class Point extends Feature {
     render(props) {
-        const { x, y, z } = props;
+        const { x, y } = props;
         this.el = document.createElement('div');
         this.el.style.cssText = `
             position: absolute;
             width: 2px;
             height: 2px;
-            background-color: 'green';
+            background-color: green;
             border-radius: 50%;
             left: calc(50% - 1px);
             top: calc(50% - 1px);
-            transform: translate3d(${x}px, ${y}px, ${z}px);
+            transform: translate3d(${x}px, ${y}px, 0);
         `;
         return this;
     }
@@ -67,7 +67,6 @@ export class Circle {
             border: 1px solid rgba(128, 128, 128, 0.3);
             border-radius: 50%;
             margin: 0 auto;
-            perspective: ${diameter}px;
             perspective-origin: 50% 50%;
         `;
         this.containerEl.appendChild(this.el);
