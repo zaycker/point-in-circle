@@ -1,14 +1,15 @@
 export class Feature {
-    constructor([x = 0, y = 0] = []) {
+    constructor([x = 0, y = 0, z = 0] = []) {
         this.x = x;
         this.y = y;
+        this.z = z;
         this.el = null;
     }
 }
 
 export class Point extends Feature {
     render(props) {
-        const { x, y } = props;
+        const { x, y, z } = props;
         this.el = document.createElement('div');
         this.el.style.cssText = `
             position: absolute;
@@ -18,7 +19,7 @@ export class Point extends Feature {
             border-radius: 50%;
             left: calc(50% - 1px);
             top: calc(50% - 1px);
-            transform: translate(${x}px, ${y}px);
+            transform: translate3d(${x}px, ${y}px, ${z}px);
         `;
         return this;
     }
@@ -66,6 +67,8 @@ export class Circle {
             border: 1px solid rgba(128, 128, 128, 0.3);
             border-radius: 50%;
             margin: 0 auto;
+            perspective: ${diameter}px;
+            perspective-origin: 50% 50%;
         `;
         this.containerEl.appendChild(this.el);
 
@@ -81,7 +84,8 @@ export class Circle {
             this.features.forEach(feature => {
                 const normalizedFeatureCoords = {
                     x: feature.x * ratio,
-                    y: feature.y * ratio
+                    y: feature.y * ratio,
+                    z: feature.z * ratio
                 };
 
                 if (
